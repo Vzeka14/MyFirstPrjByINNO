@@ -13,39 +13,41 @@
 /* ========== Переключатель языка ========== */
 .language-switcher {
   position: absolute;
-  top: 1rem;
-  right: 1rem;
+  top: 0.5rem;
+  right: 0;
   display: flex;
   gap: 0.3rem;
 }
 
 .lang-btn {
-  width: 36px;
-  height: 36px;
+  width: 32px;
+  height: 32px;
   border-radius: 8px;
-  border: 2px solid rgba(255, 255, 255, 0.1);
-  background: rgba(255, 255, 255, 0.05);
+  border: none;
+  background: transparent;
   cursor: pointer;
-  font-size: 1.2rem;
+  font-size: 1.3rem;
   display: flex;
   align-items: center;
   justify-content: center;
   transition: all 0.2s ease;
   padding: 0;
+  opacity: 0.6;
 }
 
 .lang-btn:hover {
-  border-color: rgba(255, 255, 255, 0.3);
-  transform: scale(1.05);
+  opacity: 1;
+  transform: scale(1.1);
 }
 
 .lang-btn.active {
-  border-color: #667eea;
-  background: rgba(102, 126, 234, 0.2);
+  opacity: 1;
+  transform: scale(1.15);
 }
 
 .app-title {
   font-size: 1.8rem;
+  margin-top: 2.5rem;
   margin-bottom: 2rem;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   -webkit-background-clip: text;
@@ -293,6 +295,25 @@
   font-size: 1rem;
 }
 
+/* ========== Напоминание об инфляции ========== */
+.inflation-note {
+  display: flex;
+  gap: 0.5rem;
+  align-items: flex-start;
+  margin-top: 1.5rem;
+  padding: 0.8rem 1rem;
+  background: rgba(59, 130, 246, 0.1);
+  border: 1px solid rgba(59, 130, 246, 0.2);
+  border-radius: 10px;
+  font-size: 0.8rem;
+  color: #93c5fd;
+  line-height: 1.4;
+}
+
+.inflation-icon {
+  flex-shrink: 0;
+}
+
 /* ========== Индикатор шагов ========== */
 .steps-indicator {
   display: flex;
@@ -323,20 +344,6 @@
     background: white;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
     border: 1px solid #e5e7eb;
-  }
-
-  .lang-btn {
-    border-color: #e5e7eb;
-    background: #fafafa;
-  }
-
-  .lang-btn:hover {
-    border-color: #d1d5db;
-  }
-
-  .lang-btn.active {
-    border-color: #667eea;
-    background: rgba(102, 126, 234, 0.1);
   }
 
   .choice-btn {
@@ -379,5 +386,11 @@
 
   .step-dot {
     background: #d1d5db;
+  }
+
+  .inflation-note {
+    background: rgba(59, 130, 246, 0.08);
+    border-color: rgba(59, 130, 246, 0.15);
+    color: #2563eb;
   }
 }

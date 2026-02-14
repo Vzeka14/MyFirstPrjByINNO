@@ -13,7 +13,7 @@ function Result(props) {
 
   // Форматирование числа с пробелами (1000000 -> 1 000 000)
   const formatMoney = (num) => {
-    return Math.round(num).toLocaleString('en-US')
+    return Math.round(num).toLocaleString('en-US') + ' ' + t.currency
   }
 
   // ========== РАСЧЁТ ДЛЯ КРЕДИТА ==========
@@ -135,6 +135,12 @@ function Result(props) {
             </div>
           </>
         )}
+      </div>
+
+      {/* Напоминание об инфляции */}
+      <div className="inflation-note">
+        <span className="inflation-icon">ℹ️</span>
+        <span>{t.inflationNote}</span>
       </div>
 
       <button className="btn btn-reset" onClick={props.onReset}>

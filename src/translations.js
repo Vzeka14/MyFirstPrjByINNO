@@ -48,6 +48,10 @@ const translations = {
     totalIncome: 'Total Income',
     totalBalance: 'Total Balance',
     calculateAgain: 'Calculate Again',
+    currency: 'c.u.',
+
+    // Напоминание об инфляции
+    inflationNote: 'Note: Average global inflation is ~3-4% per year. The real value of money may change over time.',
 
     // Кнопки
     back: 'Back',
@@ -100,6 +104,10 @@ const translations = {
     totalIncome: 'Ingreso Total',
     totalBalance: 'Saldo Total',
     calculateAgain: 'Calcular de Nuevo',
+    currency: 'u.c.',
+
+    // Nota sobre inflación
+    inflationNote: 'Nota: La inflación mundial promedio es ~3-4% anual. El valor real del dinero puede cambiar con el tiempo.',
 
     // Botones
     back: 'Atrás',
@@ -152,6 +160,10 @@ const translations = {
     totalIncome: 'Общий доход за весь срок',
     totalBalance: 'Итого на счёте',
     calculateAgain: 'Рассчитать заново',
+    currency: 'у.е.',
+
+    // Напоминание об инфляции
+    inflationNote: 'Примечание: Средняя мировая инфляция ~3-4% в год. Реальная ценность денег может меняться со временем.',
 
     // Кнопки
     back: 'Назад',
