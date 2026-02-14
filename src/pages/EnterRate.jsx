@@ -1,5 +1,6 @@
 // Страница 2: Ввод процентной ставки
 // PROPS:
+//   t        — объект с переводами
 //   calcType — тип расчёта ('credit' или 'deposit')
 //   rate     — текущее значение ставки
 //   setRate  — функция для изменения ставки
@@ -7,7 +8,7 @@
 //   onBack   — вернуться назад
 
 function EnterRate(props) {
-  const isCredit = props.calcType === 'credit'
+  const { t } = props
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -18,42 +19,33 @@ function EnterRate(props) {
 
   return (
     <div className="page">
-      <h2>
-        {isCredit
-          ? 'Процентная ставка по кредиту'
-          : 'Процентная ставка по вкладу'}
-      </h2>
-      <p className="page-description">
-        {isCredit
-          ? 'Укажите годовую процентную ставку (APR)'
-          : 'Укажите годовую процентную ставку без капитализации'}
-      </p>
+      <h2>{t.enterRate}</h2>
 
       <form onSubmit={handleSubmit}>
         <div className="input-group">
+          <label className="input-label">{t.annualRate}</label>
           <input
             type="number"
             step="0.01"
             min="0.01"
             max="100"
-            placeholder="Например, 12.5"
+            placeholder={t.rateExample}
             value={props.rate}
             onChange={(e) => props.setRate(e.target.value)}
             className="input-field"
           />
-          <span className="input-suffix">% годовых</span>
         </div>
 
         <div className="nav-buttons">
           <button type="button" className="btn btn-back" onClick={props.onBack}>
-            Назад
+            {t.back}
           </button>
           <button
             type="submit"
             className="btn btn-next"
             disabled={!props.rate || Number(props.rate) <= 0}
           >
-            Далее
+            {t.next}
           </button>
         </div>
       </form>

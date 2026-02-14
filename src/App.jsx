@@ -1,7 +1,11 @@
 import { useState } from 'react'
 import './App.css'
 
-// Импортируем наши страницы-компоненты
+// Импортируем переводы
+import translations from './translations'
+
+// Импортируем компоненты
+import LanguageSwitcher from './components/LanguageSwitcher'
 import ChooseType from './pages/ChooseType'
 import EnterRate from './pages/EnterRate'
 import EnterTerm from './pages/EnterTerm'
@@ -10,6 +14,9 @@ import Result from './pages/Result'
 
 function App() {
   // ========== STATE (состояние) ==========
+  // Текущий язык (английский по умолчанию)
+  const [lang, setLang] = useState('en')
+
   // Какая страница сейчас показана (1, 2, 3, 4 или 5)
   const [step, setStep] = useState(1)
 
@@ -25,14 +32,13 @@ function App() {
   // Сумма кредита или вклада (число)
   const [amount, setAmount] = useState('')
 
-  // ========== НАВИГАЦИЯ ==========
-  // Функция "перейти на следующую страницу"
-  const goNext = () => setStep(step + 1)
+  // Получаем тексты для текущего языка
+  const t = translations[lang]
 
-  // Функция "вернуться назад"
+  // ========== НАВИГАЦИЯ ==========
+  const goNext = () => setStep(step + 1)
   const goBack = () => setStep(step - 1)
 
-  // Функция "начать заново"
   const reset = () => {
     setStep(1)
     setCalcType('')
@@ -41,16 +47,18 @@ function App() {
     setAmount('')
   }
 
-  // ========== РЕНДЕР СТРАНИЦ ==========
-  // В зависимости от шага показываем нужную страницу
-  // Обрати внимание: мы ПЕРЕДАЁМ данные и функции через PROPS!
+  // ========== РЕНДЕР ==========
   return (
     <div className="app">
-      <h1 className="app-title">Финансовый калькулятор</h1>
+      {/* Переключатель языка в правом верхнем углу */}
+      <LanguageSwitcher currentLang={lang} onChangeLang={setLang} />
+
+      <h1 className="app-title">{t.appTitle}</h1>
 
       <div className="app-card">
         {step === 1 && (
           <ChooseType
+            t={t}
             onChoose={(type) => {
               setCalcType(type)
               goNext()
@@ -60,6 +68,7 @@ function App() {
 
         {step === 2 && (
           <EnterRate
+            t={t}
             calcType={calcType}
             rate={rate}
             setRate={setRate}
@@ -70,6 +79,7 @@ function App() {
 
         {step === 3 && (
           <EnterTerm
+            t={t}
             calcType={calcType}
             term={term}
             setTerm={setTerm}
@@ -80,6 +90,7 @@ function App() {
 
         {step === 4 && (
           <EnterAmount
+            t={t}
             calcType={calcType}
             amount={amount}
             setAmount={setAmount}
@@ -90,6 +101,7 @@ function App() {
 
         {step === 5 && (
           <Result
+            t={t}
             calcType={calcType}
             rate={Number(rate)}
             term={Number(term)}
@@ -99,7 +111,7 @@ function App() {
         )}
       </div>
 
-      {/* Индикатор шагов внизу */}
+      {/* Индикатор шагов */}
       <div className="steps-indicator">
         {[1, 2, 3, 4, 5].map((s) => (
           <div

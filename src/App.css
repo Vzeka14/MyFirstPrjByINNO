@@ -1,5 +1,6 @@
 /* ========== Общие стили приложения ========== */
 .app {
+  position: relative;
   max-width: 500px;
   margin: 0 auto;
   padding: 2rem 1rem;
@@ -7,6 +8,40 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+/* ========== Переключатель языка ========== */
+.language-switcher {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  display: flex;
+  gap: 0.3rem;
+}
+
+.lang-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.05);
+  cursor: pointer;
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  padding: 0;
+}
+
+.lang-btn:hover {
+  border-color: rgba(255, 255, 255, 0.3);
+  transform: scale(1.05);
+}
+
+.lang-btn.active {
+  border-color: #667eea;
+  background: rgba(102, 126, 234, 0.2);
 }
 
 .app-title {
@@ -94,9 +129,14 @@
 /* ========== Поля ввода ========== */
 .input-group {
   display: flex;
-  align-items: center;
+  flex-direction: column;
   gap: 0.5rem;
-  margin-bottom: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.input-label {
+  font-size: 0.9rem;
+  color: #aaa;
 }
 
 .input-field {
@@ -285,9 +325,27 @@
     border: 1px solid #e5e7eb;
   }
 
+  .lang-btn {
+    border-color: #e5e7eb;
+    background: #fafafa;
+  }
+
+  .lang-btn:hover {
+    border-color: #d1d5db;
+  }
+
+  .lang-btn.active {
+    border-color: #667eea;
+    background: rgba(102, 126, 234, 0.1);
+  }
+
   .choice-btn {
     border-color: #e5e7eb;
     background: #fafafa;
+  }
+
+  .input-label {
+    color: #666;
   }
 
   .input-field {

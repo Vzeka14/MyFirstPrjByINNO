@@ -1,25 +1,24 @@
 // Страница 5: Результат расчёта
 // PROPS:
+//   t        — объект с переводами
 //   calcType — тип расчёта ('credit' или 'deposit')
-//   rate     — годовая ставка (число, например 12.5)
+//   rate     — годовая ставка (число)
 //   term     — срок в месяцах (число)
 //   amount   — сумма (число)
 //   onReset  — функция "начать заново"
 
 function Result(props) {
+  const { t } = props
   const isCredit = props.calcType === 'credit'
 
   // Форматирование числа с пробелами (1000000 -> 1 000 000)
   const formatMoney = (num) => {
-    return Math.round(num).toLocaleString('sv-SE')
+    return Math.round(num).toLocaleString('en-US')
   }
 
   // ========== РАСЧЁТ ДЛЯ КРЕДИТА ==========
-  // Формула аннуитетного платежа:
-  // M = P * [r * (1+r)^n] / [(1+r)^n - 1]
-  // Где: P — сумма кредита, r — месячная ставка, n — кол-во месяцев
   const calculateCredit = () => {
-    const monthlyRate = props.rate / 100 / 12  // годовая ставка -> месячная
+    const monthlyRate = props.rate / 100 / 12
     const n = props.term
 
     if (monthlyRate === 0) {
@@ -52,9 +51,6 @@ function Result(props) {
   }
 
   // ========== РАСЧЁТ ДЛЯ ВКЛАДА ==========
-  // Простой процент (без капитализации):
-  // Доход = P * r * t
-  // Где: P — сумма вклада, r — годовая ставка, t — срок в годах
   const calculateDeposit = () => {
     const yearlyRate = props.rate / 100
     const years = props.term / 12
@@ -72,26 +68,25 @@ function Result(props) {
     }
   }
 
-  // Вызываем нужный расчёт
   const result = isCredit ? calculateCredit() : calculateDeposit()
 
   return (
     <div className="page">
-      <h2>{isCredit ? 'Расчёт кредита' : 'Расчёт вклада'}</h2>
+      <h2>{isCredit ? t.loanCalculation : t.depositCalculation}</h2>
 
       {/* Исходные данные */}
       <div className="result-summary">
         <div className="summary-row">
-          <span>Сумма:</span>
-          <span>{formatMoney(props.amount)} SEK</span>
+          <span>{t.amount}:</span>
+          <span>{formatMoney(props.amount)}</span>
         </div>
         <div className="summary-row">
-          <span>Ставка:</span>
-          <span>{props.rate}% годовых</span>
+          <span>{t.rate}:</span>
+          <span>{props.rate}% {t.perYear}</span>
         </div>
         <div className="summary-row">
-          <span>Срок:</span>
-          <span>{props.term} мес. ({(props.term / 12).toFixed(1)} лет)</span>
+          <span>{t.term}:</span>
+          <span>{props.term} {t.months} ({(props.term / 12).toFixed(1)} {t.years})</span>
         </div>
       </div>
 
@@ -100,50 +95,50 @@ function Result(props) {
         {isCredit ? (
           <>
             <div className="result-item main">
-              <span className="result-label">Ежемесячный платёж</span>
-              <span className="result-value">{formatMoney(result.monthlyPayment)} SEK</span>
+              <span className="result-label">{t.monthlyPayment}</span>
+              <span className="result-value">{formatMoney(result.monthlyPayment)}</span>
             </div>
             <div className="result-item">
-              <span className="result-label">Общая сумма выплат</span>
-              <span className="result-value">{formatMoney(result.totalPayment)} SEK</span>
+              <span className="result-label">{t.totalPayment}</span>
+              <span className="result-value">{formatMoney(result.totalPayment)}</span>
             </div>
             <div className="result-item warning">
-              <span className="result-label">Переплата за весь срок</span>
-              <span className="result-value">{formatMoney(result.overpayment)} SEK</span>
+              <span className="result-label">{t.totalOverpayment}</span>
+              <span className="result-value">{formatMoney(result.overpayment)}</span>
             </div>
             <div className="result-item">
-              <span className="result-label">Переплата в год</span>
-              <span className="result-value">{formatMoney(result.overpaymentPerYear)} SEK</span>
+              <span className="result-label">{t.overpaymentPerYear}</span>
+              <span className="result-value">{formatMoney(result.overpaymentPerYear)}</span>
             </div>
             <div className="result-item">
-              <span className="result-label">Переплата в месяц</span>
-              <span className="result-value">{formatMoney(result.overpaymentPerMonth)} SEK</span>
+              <span className="result-label">{t.overpaymentPerMonth}</span>
+              <span className="result-value">{formatMoney(result.overpaymentPerMonth)}</span>
             </div>
           </>
         ) : (
           <>
             <div className="result-item main">
-              <span className="result-label">Доход в месяц</span>
-              <span className="result-value">{formatMoney(result.incomePerMonth)} SEK</span>
+              <span className="result-label">{t.monthlyIncome}</span>
+              <span className="result-value">{formatMoney(result.incomePerMonth)}</span>
             </div>
             <div className="result-item">
-              <span className="result-label">Доход в год</span>
-              <span className="result-value">{formatMoney(result.incomePerYear)} SEK</span>
+              <span className="result-label">{t.yearlyIncome}</span>
+              <span className="result-value">{formatMoney(result.incomePerYear)}</span>
             </div>
             <div className="result-item success">
-              <span className="result-label">Общий доход за весь срок</span>
-              <span className="result-value">{formatMoney(result.totalIncome)} SEK</span>
+              <span className="result-label">{t.totalIncome}</span>
+              <span className="result-value">{formatMoney(result.totalIncome)}</span>
             </div>
             <div className="result-item main">
-              <span className="result-label">Итого на счёте</span>
-              <span className="result-value">{formatMoney(result.totalWithIncome)} SEK</span>
+              <span className="result-label">{t.totalBalance}</span>
+              <span className="result-value">{formatMoney(result.totalWithIncome)}</span>
             </div>
           </>
         )}
       </div>
 
       <button className="btn btn-reset" onClick={props.onReset}>
-        Рассчитать заново
+        {t.calculateAgain}
       </button>
     </div>
   )

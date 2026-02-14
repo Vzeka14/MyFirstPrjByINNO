@@ -1,5 +1,6 @@
 // Страница 4: Ввод суммы
 // PROPS:
+//   t         — объект с переводами
 //   calcType  — тип расчёта
 //   amount    — текущая сумма
 //   setAmount — функция для изменения суммы
@@ -7,6 +8,7 @@
 //   onBack    — вернуться назад
 
 function EnterAmount(props) {
+  const { t } = props
   const isCredit = props.calcType === 'credit'
 
   const handleSubmit = (e) => {
@@ -18,38 +20,33 @@ function EnterAmount(props) {
 
   return (
     <div className="page">
-      <h2>
-        {isCredit ? 'Сумма кредита' : 'Сумма вклада'}
-      </h2>
-      <p className="page-description">
-        {isCredit
-          ? 'Какую сумму вы хотите взять в кредит?'
-          : 'Какую сумму вы хотите положить на депозит?'}
-      </p>
+      <h2>{t.enterAmount}</h2>
 
       <form onSubmit={handleSubmit}>
         <div className="input-group">
+          <label className="input-label">
+            {isCredit ? t.loanAmount : t.depositAmount}
+          </label>
           <input
             type="number"
             min="1"
-            placeholder="Например, 500000"
+            placeholder={t.amountExample}
             value={props.amount}
             onChange={(e) => props.setAmount(e.target.value)}
             className="input-field"
           />
-          <span className="input-suffix">SEK</span>
         </div>
 
         <div className="nav-buttons">
           <button type="button" className="btn btn-back" onClick={props.onBack}>
-            Назад
+            {t.back}
           </button>
           <button
             type="submit"
             className="btn btn-next"
             disabled={!props.amount || Number(props.amount) <= 0}
           >
-            Рассчитать
+            {t.next}
           </button>
         </div>
       </form>
