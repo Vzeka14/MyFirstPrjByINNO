@@ -6,6 +6,7 @@ import translations from './translations'
 
 // Импортируем компоненты
 import LanguageSwitcher from './components/LanguageSwitcher'
+import SupportSection from './components/SupportSection'
 import ChooseType from './pages/ChooseType'
 import EnterRate from './pages/EnterRate'
 import EnterTerm from './pages/EnterTerm'
@@ -120,6 +121,9 @@ function App() {
           />
         ))}
       </div>
+
+      {/* Секция поддержки */}
+      <SupportSection t={t} />
     </div>
   )
 }

@@ -338,6 +338,94 @@
   background: #10b981;
 }
 
+/* ========== Секция поддержки ========== */
+.support-section {
+  width: 100%;
+  margin-top: 2.5rem;
+  padding: 1.5rem;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  text-align: center;
+}
+
+.support-title {
+  font-size: 1.1rem;
+  margin-bottom: 0.8rem;
+  color: #a78bfa;
+}
+
+.support-text {
+  font-size: 0.85rem;
+  color: #888;
+  margin-bottom: 1.2rem;
+  line-height: 1.5;
+}
+
+.btn-donate {
+  display: inline-block;
+  padding: 0.7rem 1.5rem;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-donate:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+}
+
+.crypto-section {
+  margin-top: 1.2rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.crypto-label {
+  display: block;
+  font-size: 0.8rem;
+  color: #888;
+  margin-bottom: 0.5rem;
+}
+
+.crypto-address {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.address-text {
+  font-size: 0.7rem;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 0.4rem 0.6rem;
+  border-radius: 6px;
+  color: #aaa;
+  word-break: break-all;
+}
+
+.btn-copy {
+  padding: 0.4rem 0.8rem;
+  font-size: 0.75rem;
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  border-radius: 6px;
+  color: inherit;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-copy:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
 /* ========== Светлая тема ========== */
 @media (prefers-color-scheme: light) {
   .app-card {
@@ -392,5 +480,31 @@
     background: rgba(59, 130, 246, 0.08);
     border-color: rgba(59, 130, 246, 0.15);
     color: #2563eb;
+  }
+
+  .support-section {
+    background: #fafafa;
+    border-color: #e5e7eb;
+  }
+
+  .support-title {
+    color: #7c3aed;
+  }
+
+  .address-text {
+    background: #f3f4f6;
+    color: #666;
+  }
+
+  .btn-copy {
+    background: #e5e7eb;
+  }
+
+  .btn-copy:hover {
+    background: #d1d5db;
+  }
+
+  .crypto-section {
+    border-top-color: #e5e7eb;
   }
 }

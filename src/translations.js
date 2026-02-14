@@ -56,6 +56,14 @@ const translations = {
     // Кнопки
     back: 'Back',
     next: 'Next',
+
+    // Секция поддержки
+    supportProject: 'Support the Project',
+    supportText: 'Thanks to your donations, this site remains ad-free. Your kindness helps the developer continue improving the app.',
+    donatePayPal: 'Donate via PayPal',
+    orCrypto: 'or via crypto',
+    copyAddress: 'Copy',
+    copied: 'Copied!',
   },
 
   es: {
@@ -112,6 +120,14 @@ const translations = {
     // Botones
     back: 'Atrás',
     next: 'Siguiente',
+
+    // Sección de apoyo
+    supportProject: 'Apoyar el Proyecto',
+    supportText: 'Gracias a sus donaciones, este sitio permanece sin publicidad. Su generosidad ayuda al desarrollador a seguir mejorando la aplicación.',
+    donatePayPal: 'Donar vía PayPal',
+    orCrypto: 'o vía cripto',
+    copyAddress: 'Copiar',
+    copied: '¡Copiado!',
   },
 
   ru: {
@@ -168,6 +184,14 @@ const translations = {
     // Кнопки
     back: 'Назад',
     next: 'Далее',
+
+    // Секция поддержки
+    supportProject: 'Поддержать проект',
+    supportText: 'Благодаря вашим пожертвованиям на сайте нет рекламы. Ваша доброта помогает разработчику продолжать улучшать приложение.',
+    donatePayPal: 'Поддержать через PayPal',
+    orCrypto: 'или криптой',
+    copyAddress: 'Копировать',
+    copied: 'Скопировано!',
   },
 }
 
