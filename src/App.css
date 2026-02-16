@@ -66,11 +66,18 @@
   align-items: center;
 }
 
+/* ========== Заголовок с флажками ========== */
+.header-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  width: 100%;
+  margin-top: 1rem;
+}
+
 /* ========== Переключатель языка ========== */
 .language-switcher {
-  position: absolute;
-  top: 0.5rem;
-  right: 0;
   display: flex;
   gap: 0.3rem;
 }
@@ -103,12 +110,15 @@
 
 .app-title {
   font-size: 1.8rem;
-  margin-top: 2.5rem;
-  margin-bottom: 2rem;
+  margin: 0;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+}
+
+.header-row + .app-card {
+  margin-top: 2rem;
 }
 
 .app-card {
@@ -625,5 +635,27 @@
 
   .crypto-section {
     border-top-color: #e5e7eb;
+  }
+
+  /* Welcome page - чёрный текст для светлой темы */
+  .welcome-description {
+    color: #1f2937;
+  }
+
+  .welcome-features li {
+    color: #374151;
+    border-bottom-color: #e5e7eb;
+  }
+
+  .page-description {
+    color: #4b5563;
+  }
+
+  .summary-row {
+    color: #4b5563;
+  }
+
+  .result-label {
+    color: #4b5563;
   }
 }

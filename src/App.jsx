@@ -72,10 +72,11 @@ function App() {
       {/* Бегущая строка с котировками */}
       <MarketTicker />
 
-      {/* Переключатель языка */}
-      <LanguageSwitcher currentLang={lang} onChangeLang={setLang} />
-
-      <h1 className="app-title">{t.appTitle}</h1>
+      {/* Заголовок с флажками */}
+      <div className="header-row">
+        <h1 className="app-title">{t.appTitle}</h1>
+        <LanguageSwitcher currentLang={lang} onChangeLang={setLang} />
+      </div>
 
       <div className="app-card">
         {step === 0 && (
