@@ -1,22 +1,28 @@
-// Страница 5: Результат расчёта
+// Страница результата расчёта
 // PROPS:
-//   t        — объект с переводами
-//   calcType — тип расчёта ('credit' или 'deposit')
-//   rate     — годовая ставка (число)
-//   term     — срок в месяцах (число)
-//   amount   — сумма (число)
-//   onReset  — функция "начать заново"
+//   t           — объект с переводами
+//   calcType    — тип расчёта ('credit' или 'deposit')
+//   rate        — годовая ставка (число)
+//   term        — срок в месяцах (число)
+//   amount      — сумма (число)
+//   reinvest    — реинвестировать ли (true/false/null)
+//   reinvestDays — частота реинвестирования в днях
+//   onReset     — функция "начать заново"
 
 function Result(props) {
   const { t } = props
   const isCredit = props.calcType === 'credit'
+  const isStaking = props.calcType === 'deposit' && props.reinvest === true
 
-  // Форматирование числа с пробелами (1000000 -> 1 000 000)
+  // Форматирование числа с 2 десятичными знаками
   const formatMoney = (num) => {
-    return Math.round(num).toLocaleString('en-US') + ' ' + t.currency
+    return num.toLocaleString('en-US', {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2
+    }) + ' ' + t.currency
   }
 
-  // ========== РАСЧЁТ ДЛЯ КРЕДИТА ==========
+  // ========== РАСЧЁТ ДЛЯ КРЕДИТА (аннуитет) ==========
   const calculateCredit = () => {
     const monthlyRate = props.rate / 100 / 12
     const n = props.term
@@ -50,7 +56,7 @@ function Result(props) {
     }
   }
 
-  // ========== РАСЧЁТ ДЛЯ ВКЛАДА ==========
+  // ========== РАСЧЁТ ДЛЯ ДЕПОЗИТА (простой процент) ==========
   const calculateDeposit = () => {
     const yearlyRate = props.rate / 100
     const years = props.term / 12
@@ -68,11 +74,54 @@ function Result(props) {
     }
   }
 
-  const result = isCredit ? calculateCredit() : calculateDeposit()
+  // ========== РАСЧЁТ ДЛЯ СТЕЙКИНГА (сложный процент) ==========
+  // Формула: A = P * (1 + r/n)^(n*t)
+  // P — начальная сумма, r — годовая ставка, n — периоды в год, t — время в годах
+  const calculateStaking = () => {
+    const P = props.amount
+    const r = props.rate / 100
+    const periodsPerYear = 365 / props.reinvestDays
+    const n = periodsPerYear
+    const t = props.term / 12
+
+    // Сложный процент
+    const totalWithIncome = P * Math.pow(1 + r / n, n * t)
+    const totalIncome = totalWithIncome - P
+    const incomePerYear = totalIncome / t
+    const incomePerMonth = incomePerYear / 12
+
+    // Для сравнения: простой процент
+    const simpleIncome = P * r * t
+
+    return {
+      totalIncome,
+      incomePerYear,
+      incomePerMonth,
+      totalWithIncome,
+      compoundBonus: totalIncome - simpleIncome,
+    }
+  }
+
+  // Выбираем нужный расчёт
+  let result
+  if (isCredit) {
+    result = calculateCredit()
+  } else if (isStaking) {
+    result = calculateStaking()
+  } else {
+    result = calculateDeposit()
+  }
+
+  // Определяем заголовок
+  const getTitle = () => {
+    if (isCredit) return t.loanCalculation
+    if (isStaking) return t.stakingCalculation
+    return t.depositCalculation
+  }
 
   return (
     <div className="page">
-      <h2>{isCredit ? t.loanCalculation : t.depositCalculation}</h2>
+      <h2>{getTitle()}</h2>
 
       {/* Исходные данные */}
       <div className="result-summary">
@@ -88,6 +137,12 @@ function Result(props) {
           <span>{t.term}:</span>
           <span>{props.term} {t.months} ({(props.term / 12).toFixed(1)} {t.years})</span>
         </div>
+        {isStaking && (
+          <div className="summary-row">
+            <span>{t.reinvestFrequency}:</span>
+            <span>{props.reinvestDays}</span>
+          </div>
+        )}
       </div>
 
       {/* Результаты */}
@@ -129,6 +184,12 @@ function Result(props) {
               <span className="result-label">{t.totalIncome}</span>
               <span className="result-value">{formatMoney(result.totalIncome)}</span>
             </div>
+            {isStaking && result.compoundBonus > 0 && (
+              <div className="result-item staking">
+                <span className="result-label">{t.compoundIncome}</span>
+                <span className="result-value">+{formatMoney(result.compoundBonus)}</span>
+              </div>
+            )}
             <div className="result-item main">
               <span className="result-label">{t.totalBalance}</span>
               <span className="result-value">{formatMoney(result.totalWithIncome)}</span>

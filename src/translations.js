@@ -6,6 +6,14 @@ const translations = {
     // Заголовок
     appTitle: 'Financial Calculator',
 
+    // Страница приветствия
+    welcomeTitle: 'Welcome!',
+    welcomeDescription: 'This app helps you make smart financial decisions by calculating loan overpayments and forecasting income from deposits or staking.',
+    welcomeFeature1: 'Calculate loan payments and overpayments',
+    welcomeFeature2: 'Forecast deposit income',
+    welcomeFeature3: 'Compound interest for staking',
+    getStarted: 'Get Started',
+
     // Страница 1: Выбор типа
     whatToCalculate: 'What would you like to calculate?',
     credit: 'Loan',
@@ -57,6 +65,15 @@ const translations = {
     back: 'Back',
     next: 'Next',
 
+    // Стейкинг
+    reinvestQuestion: 'Will you reinvest your dividends?',
+    reinvestYes: 'Yes (Compound Interest)',
+    reinvestNo: 'No (Simple Interest)',
+    reinvestFrequency: 'Reinvest every (days)',
+    reinvestFrequencyExample: 'For example: 30, 90, 365...',
+    stakingCalculation: 'Staking Calculation',
+    compoundIncome: 'Compound Income',
+
     // Секция поддержки
     supportProject: 'Support the Project',
     supportText: 'Thanks to your donations, this site remains ad-free. Your kindness helps the developer continue improving the app.',
@@ -64,11 +81,22 @@ const translations = {
     orCrypto: 'or via crypto',
     copyAddress: 'Copy',
     copied: 'Copied!',
+
+    // Контакт
+    contactEmail: 'Contact',
   },
 
   es: {
     // Título
     appTitle: 'Calculadora Financiera',
+
+    // Página de bienvenida
+    welcomeTitle: '¡Bienvenido!',
+    welcomeDescription: 'Esta aplicación le ayuda a tomar decisiones financieras inteligentes calculando los sobrepagos de préstamos y pronosticando ingresos de depósitos o staking.',
+    welcomeFeature1: 'Calcular pagos y sobrepagos de préstamos',
+    welcomeFeature2: 'Pronosticar ingresos de depósitos',
+    welcomeFeature3: 'Interés compuesto para staking',
+    getStarted: 'Comenzar',
 
     // Página 1: Selección de tipo
     whatToCalculate: '¿Qué desea calcular?',
@@ -121,6 +149,15 @@ const translations = {
     back: 'Atrás',
     next: 'Siguiente',
 
+    // Staking
+    reinvestQuestion: '¿Reinvertirá sus dividendos?',
+    reinvestYes: 'Sí (Interés Compuesto)',
+    reinvestNo: 'No (Interés Simple)',
+    reinvestFrequency: 'Reinvertir cada (días)',
+    reinvestFrequencyExample: 'Por ejemplo: 30, 90, 365...',
+    stakingCalculation: 'Cálculo de Staking',
+    compoundIncome: 'Ingreso Compuesto',
+
     // Sección de apoyo
     supportProject: 'Apoyar el Proyecto',
     supportText: 'Gracias a sus donaciones, este sitio permanece sin publicidad. Su generosidad ayuda al desarrollador a seguir mejorando la aplicación.',
@@ -128,11 +165,22 @@ const translations = {
     orCrypto: 'o vía cripto',
     copyAddress: 'Copiar',
     copied: '¡Copiado!',
+
+    // Contacto
+    contactEmail: 'Contacto',
   },
 
   ru: {
     // Заголовок
     appTitle: 'Финансовый калькулятор',
+
+    // Страница приветствия
+    welcomeTitle: 'Добро пожаловать!',
+    welcomeDescription: 'Это приложение помогает принимать разумные финансовые решения, рассчитывая переплаты по кредитам и прогнозируя доход от депозитов или стейкинга.',
+    welcomeFeature1: 'Расчёт платежей и переплат по кредитам',
+    welcomeFeature2: 'Прогноз дохода от депозитов',
+    welcomeFeature3: 'Сложный процент для стейкинга',
+    getStarted: 'Начать',
 
     // Страница 1: Выбор типа
     whatToCalculate: 'Что будем считать?',
@@ -185,6 +233,15 @@ const translations = {
     back: 'Назад',
     next: 'Далее',
 
+    // Стейкинг
+    reinvestQuestion: 'Будете ли вы реинвестировать дивиденды?',
+    reinvestYes: 'Да (Сложный процент)',
+    reinvestNo: 'Нет (Простой процент)',
+    reinvestFrequency: 'Реинвестировать каждые (дней)',
+    reinvestFrequencyExample: 'Например: 30, 90, 365...',
+    stakingCalculation: 'Расчёт стейкинга',
+    compoundIncome: 'Сложный доход',
+
     // Секция поддержки
     supportProject: 'Поддержать проект',
     supportText: 'Благодаря вашим пожертвованиям на сайте нет рекламы. Ваша доброта помогает разработчику продолжать улучшать приложение.',
@@ -192,6 +249,9 @@ const translations = {
     orCrypto: 'или криптой',
     copyAddress: 'Копировать',
     copied: 'Скопировано!',
+
+    // Контакт
+    contactEmail: 'Контакт',
   },
 }
 

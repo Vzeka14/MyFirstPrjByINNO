@@ -7,56 +7,81 @@ import translations from './translations'
 // Импортируем компоненты
 import LanguageSwitcher from './components/LanguageSwitcher'
 import SupportSection from './components/SupportSection'
+import MarketTicker from './components/MarketTicker'
+import Welcome from './pages/Welcome'
 import ChooseType from './pages/ChooseType'
 import EnterRate from './pages/EnterRate'
 import EnterTerm from './pages/EnterTerm'
 import EnterAmount from './pages/EnterAmount'
+import ReinvestQuestion from './pages/ReinvestQuestion'
 import Result from './pages/Result'
 
 function App() {
   // ========== STATE (состояние) ==========
-  // Текущий язык (английский по умолчанию)
   const [lang, setLang] = useState('en')
-
-  // Какая страница сейчас показана (1, 2, 3, 4 или 5)
-  const [step, setStep] = useState(1)
-
-  // Тип расчёта: 'credit' или 'deposit'
+  const [step, setStep] = useState(0) // Начинаем с 0 (приветствие)
   const [calcType, setCalcType] = useState('')
-
-  // Годовая процентная ставка (число)
   const [rate, setRate] = useState('')
-
-  // Срок в месяцах (число)
   const [term, setTerm] = useState('')
-
-  // Сумма кредита или вклада (число)
   const [amount, setAmount] = useState('')
 
-  // Получаем тексты для текущего языка
+  // Стейкинг/реинвестирование
+  const [reinvest, setReinvest] = useState(null) // null = не выбрано, true/false
+  const [reinvestDays, setReinvestDays] = useState('')
+
   const t = translations[lang]
 
   // ========== НАВИГАЦИЯ ==========
   const goNext = () => setStep(step + 1)
   const goBack = () => setStep(step - 1)
 
+  // Подсчет общего количества шагов (зависит от типа)
+  const getTotalSteps = () => {
+    if (calcType === 'deposit') return 7 // 0-6 с вопросом о реинвестировании
+    return 6 // 0-5 без вопроса о реинвестировании
+  }
+
+  // Навигация после ввода суммы
+  const handleAfterAmount = () => {
+    if (calcType === 'deposit') {
+      goNext() // Идём на вопрос о реинвестировании
+    } else {
+      setStep(6) // Сразу на результат
+    }
+  }
+
   const reset = () => {
-    setStep(1)
+    setStep(0)
     setCalcType('')
     setRate('')
     setTerm('')
     setAmount('')
+    setReinvest(null)
+    setReinvestDays('')
+  }
+
+  // Индикатор шагов (сколько точек показывать)
+  const getStepDots = () => {
+    const total = getTotalSteps()
+    return Array.from({ length: total }, (_, i) => i)
   }
 
   // ========== РЕНДЕР ==========
   return (
     <div className="app">
-      {/* Переключатель языка в правом верхнем углу */}
+      {/* Бегущая строка с котировками */}
+      <MarketTicker />
+
+      {/* Переключатель языка */}
       <LanguageSwitcher currentLang={lang} onChangeLang={setLang} />
 
       <h1 className="app-title">{t.appTitle}</h1>
 
       <div className="app-card">
+        {step === 0 && (
+          <Welcome t={t} onStart={goNext} />
+        )}
+
         {step === 1 && (
           <ChooseType
             t={t}
@@ -95,35 +120,57 @@ function App() {
             calcType={calcType}
             amount={amount}
             setAmount={setAmount}
+            onNext={handleAfterAmount}
+            onBack={goBack}
+          />
+        )}
+
+        {step === 5 && calcType === 'deposit' && (
+          <ReinvestQuestion
+            t={t}
+            reinvest={reinvest}
+            setReinvest={setReinvest}
+            reinvestDays={reinvestDays}
+            setReinvestDays={setReinvestDays}
             onNext={goNext}
             onBack={goBack}
           />
         )}
 
-        {step === 5 && (
+        {step === 6 && (
           <Result
             t={t}
             calcType={calcType}
             rate={Number(rate)}
             term={Number(term)}
             amount={Number(amount)}
+            reinvest={reinvest}
+            reinvestDays={Number(reinvestDays) || 0}
             onReset={reset}
           />
         )}
       </div>
 
       {/* Индикатор шагов */}
-      <div className="steps-indicator">
-        {[1, 2, 3, 4, 5].map((s) => (
-          <div
-            key={s}
-            className={`step-dot ${s === step ? 'active' : ''} ${s < step ? 'done' : ''}`}
-          />
-        ))}
-      </div>
+      {step > 0 && (
+        <div className="steps-indicator">
+          {getStepDots().map((s) => (
+            <div
+              key={s}
+              className={`step-dot ${s === step ? 'active' : ''} ${s < step ? 'done' : ''}`}
+            />
+          ))}
+        </div>
+      )}
 
       {/* Секция поддержки */}
       <SupportSection t={t} />
+
+      {/* Email контакт */}
+      <div className="contact-email">
+        <span>{t.contactEmail}: </span>
+        <a href="mailto:vzeka14@gmail.com">vzeka14@gmail.com</a>
+      </div>
     </div>
   )
 }
